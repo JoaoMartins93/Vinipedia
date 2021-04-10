@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="back"><a href="{% url 'wines:wine_list' %}"><img src='../media/images/backarrow.png' alt="retroceder" class="back-arrow" /></a></div>
+
+    <div class="detail-item">
+        <div class="detail-img-div">
+            <span class="helper"></span>
+            <img class="detail-img" src={{ wine.photo.url }} alt="imagem" />
+        </div>
+
+        <div class="detail-text">
+            <h4 class="wine-name">{{ wine.name }}</h4>
+            <p class="wine-score">
+                <b>Pontuação:</b> {{wine.average_score}}
+            </p>
+            <p class="wine-producer">
+                <b>Produtor:</b>
+                <a href="{{ wine.producer.get_absolute_url }}">
+                    {{ wine.producer }}
+                </a>
+            </p>
+            <p class="wine-grapes">
+                <b>Casta:</b>
+                {% for grape in wine.grapes.all %}
+                    <a href="{{ grape.get_absolute_url }}">
+                        {{ grape.name }}
+                    </a>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <p class="wine-region">
+                <b>Região:</b> {{ wine.region }}
+            </p>
+            <p class="wine-type">
+                <b>Tipo:</b> {{ wine.type }}
+            </p>
+            <p class="wine-price">
+                <b>Preço:</b> {{ wine.price }} €
+            </p>
+            <p class="wine-alcool">
+                <b>Teor Alcoólico:</b> {{ wine.alcool_lvl }} %
+            </p>
+        </div>
+        <div class="detail-description">
+            <p class="wine-description">
+                <b>Descrição</b>
+                <br>
+                <br>
+                {{ wine.description }}
+            </p>
+        </div>
+
+    </div>
+
+
+
+    <div class="evaluations">
+
+        <h2 class="evaluation-title">Avaliações </h2>
+
+        {% for evaluation in wine.evaluations.all %}
+            <div class="evaluation">
+              <img class="rounded-img" src={{evaluation.user.profile.photo.url}}>
+
+              <div class="evaluation-metadata">
+                <p class="evaluation-username">{{evaluation.user.username}}</p>
+                <small class="text-muted">{{ evaluation.created|date:"F d, Y" }}</small>
+              </div>
+              <div class='evaluation-body'>
+                <p class="evaluation-score"><b>Pontuação:</b> {{evaluation.score}}</p>
+                <p class="evaluation-content">{{ evaluation.description|linebreaks }}</p>
+              </div>
+            </div>
+
+            {% empty %}
+
+            <p>Este vinho ainda não tem avaliações.</p>
+        {% endfor %}
+    </div>
+
+
+
+    {% if user.is_authenticated %}
+
+        <div class="content-section comment">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Adicionar Comentário</legend>
+                    {{ comment_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Adicionar</button>
+                </div>
+            </form>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="top-section">
+        <h3>
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            <img class="top-section-photo" src={{user.profile.photo.url}}>
+            {% else %}
+            Sem sessão iniciada
+            {% endif %}
+        </h3>
+    </div>
+
+    <div class="content-section">
+      <h3>Estatísticas</h3>
+      <p class='text-muted'>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-light">
+              <a class="stats-link" href="/wines/search?query={{wine.type}}">Total de vinhos {{ wine.type|lower }}s: {{ same_type }}</a>
+          </li>
+          <li class="list-group-item list-group-item-light">
+              <a class="stats-link" href="/wines/search_region?query={{wine.region}}">Total de vinhos da região {{ wine.region }}: {{ same_region }}</a>
+          </li>
+          <li class="list-group-item list-group-item-light">
+              <a class="stats-link" href="/wines/search_producer?query={{wine.producer}}">Total de vinhos do mesmo produtor ({{wine.producer}}): {{ same_producer }}</a>
+          </li>
+          <li class="list-group-item list-group-item-light">Total de avaliações neste vinho: {{ wine.evaluations.count }}</li>
+        </ul>
+      </p>
+    </div>
+{% endblock %}
+

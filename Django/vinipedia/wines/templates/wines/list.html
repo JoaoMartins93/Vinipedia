@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load wine_tags %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% for wine in wines %}
+        <div class="item-div">
+            <a style="text-decoration: none" href="{{ wine.get_absolute_url }}">
+                <div class="item-img-div">
+                    <img src={{ wine.photo.url }} alt="imagem" height="248px" class="img-center"/>
+                </div>
+                <p class="item-p1">{{ wine.name }}</p>
+                <p class="item-p2">{{ wine.type }}</p>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="top-section">
+        <h3>
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            <img class="top-section-photo" src={{user.profile.photo.url}}>
+            {% else %}
+            Sem sessão iniciada
+            {% endif %}
+        </h3>
+    </div>
+
+    <div class="content-section">
+     <h3 class="search-title">Pesquisar por</h3>
+
+        <div id="dsbd" class="dropdown-search-bar-div up" onClick="menuOpen()" >
+            <h3 class="search-btn-h3">nome</h3>
+            <p class="search-btn-p">▼</p>
+        </div>
+
+        <p class='text-muted'>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light text-muted">
+                <div id="name-type-bar-option" class="active">
+                    Pesquisar por nome. (Texto sensível a Maiúsculas)
+                    {% search_bar %}
+                </div>
+                <div id="producer-bar-option">
+                    Pesquisar por produtor. (Texto sensível a Maiúsculas)
+                    {% searchProducer_bar %}
+                </div>
+                <div id="grapes-bar-option">
+                    Pesquisar por castas. (Texto sensível a Maiúsculas)
+                    {% searchGrapes_bar %}
+                </div>
+                <div class="dropdown-menu">
+                    <div class="name-type-choice" onClick="menuClose()">nome</div>
+                    <div class="producer-choice" onClick="menuClose()">produtor</div>
+                    <div class="grape-choice" onClick="menuClose()">casta</div>
+                </div>
+            </li>
+
+            <li class="list-group-item list-group-item-light text-muted">
+                Filtrar por:
+                {% filterSearch %}
+            </li>
+
+          </ul>
+        </p>
+    </div>
+{% endblock %}
