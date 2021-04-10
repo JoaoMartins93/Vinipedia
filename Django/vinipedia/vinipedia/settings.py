@@ -26,7 +26,7 @@ SECRET_KEY = '$@2^)5ht3q+7tqr@%!va885l5ou5z%91k3iu6(c0slm5^-^8#_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-vinipedia.herokuapp.com']
 
 
 # Application definition
@@ -185,3 +185,4 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
+

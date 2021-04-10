@@ -2,7 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+<<<<<<< HEAD
     <mapping directory="$PROJECT_DIR$/Django/vinipedia" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/React" vcs="Git" />
+=======
+>>>>>>> 29b87ffd0105422931af7aeb74b952252258d085
   </component>
 </project>
