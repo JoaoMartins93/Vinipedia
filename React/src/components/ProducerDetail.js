@@ -1,7 +1,16 @@
 const ProducerDetail = ({ producer = [] }) => {
+  // função para fechar o pop-up
   const DetailCloser = () => {
     document.getElementsByClassName('producer-detail')[0].style.display =
       'none';
+  };
+
+  // função para abrir novas fotografias
+  const changePhoto = (event) => {
+    let source = event.target.getAttribute('src');
+    document
+      .getElementById('producer-detail-main-picture')
+      .setAttribute('src', source);
   };
 
   if (!producer || producer.length === 0) {
@@ -18,7 +27,11 @@ const ProducerDetail = ({ producer = [] }) => {
     <div className='producer-detail'>
       <div className='pd-image'>
         <span className='helper'></span>
-        <img src={producer.producerpictures[0].pathname} alt='logo' />
+        <img
+          id='producer-detail-main-picture'
+          src={producer.producerpictures[0].pathname}
+          alt='logo'
+        />
       </div>
       <div className='pd-name'>
         <span className='helper'></span>
@@ -56,6 +69,7 @@ const ProducerDetail = ({ producer = [] }) => {
                 src={picture.pathname}
                 alt='fotografia de produtor'
                 className='producerpictures-img'
+                onClick={changePhoto}
               />
             </div>
           );
