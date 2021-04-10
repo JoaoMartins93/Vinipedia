@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="back"><a href="{% url 'producers:producer_list' %}"><img src='../media/images/backarrow.png' alt="retroceder" class="back-arrow" /></a></div>
+
+    <div class="detail-item">
+        <div id="pdid" class="detail-img-div">
+            <span id="phs" class="helper"></span>
+            <img id="pdimg" class="detail-img" src={{ producer.producerpictures.first.pathname.url }} alt="imagem" />
+        </div>
+
+        <div class="small-gallery">
+            {% for picture in producer.producerpictures.all %}
+                <span class="helper"></span>
+                <div class="small-img-div">
+                    <span id="sidh" class="helper"></span>
+                    <img class="small-img" src={{ picture.pathname.url }} alt="imagem" onClick="changePhoto()"/>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="detail-text">
+            <h4 class="wine-name">{{ producer.name }}</h4>
+            <p class="producer-text">
+                <b>Morada:</b> {{ producer.address }}
+            </p>
+            <p class="producer-text">
+                <b>Website:</b> {{ producer.website }}
+            </p>
+        </div>
+        <div class="detail-description">
+            <p class="wine-description">
+                <b>Descrição</b>
+                <br>
+                <br>
+                {{ producer.description }}
+            </p>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="top-section">
+        <h3>
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            <img class="top-section-photo" src={{user.profile.photo.url}}>
+            {% else %}
+            Sem sessão iniciada
+            {% endif %}
+        </h3>
+    </div>
+
+    <div class="content-section">
+      <h3>Estatísticas</h3>
+      <p class='text-muted'>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-light">
+              <a class="stats-link" href="/wines/search_producer?query={{producer.name}}"> Número de vinhos de {{ producer.name }}: {{ producer.wine_producer.count }} </a>
+          </li>
+        </ul>
+      </p>
+    </div>
+{% endblock %}
+
+
+
