@@ -24,6 +24,19 @@ const GrapeDetail = ({ grape = [] }) => {
             </p>
           </div>
         </div>
+        <div className='aroma-container'>
+          <p>
+            <b>Aromas</b>
+          </p>
+          {grape.aromapictures.map((aroma) => {
+            return (
+              <div className='aroma-frame'>
+                <span className='helper'></span>
+                <img src={aroma.pathname} alt='aroma' className='aroma-img' />
+              </div>
+            );
+          })}
+        </div>
 
         <div className='close-btn1'>
           <button onClick={GrapeDetailCloser}>X</button>

@@ -34,7 +34,8 @@ const Wines = () => {
 
   useEffect(() => {
     // condição que impede que o use effect
-    // 'dispare' ao renderizar a página
+    // 'dispare' ao renderizar a página,
+    // para inicializar a variável wine como []
     if (initialRender.current) {
       initialRender.current = false;
     } else {

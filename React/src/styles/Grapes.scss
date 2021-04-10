@@ -109,7 +109,7 @@
     width: 62rem;
     background-color: #80191b8c;
     margin-left: 10rem;
-    margin-top: -3rem;
+    margin-top: -6rem;
     border: 2px solid black;
     border-radius: 1%;
     backdrop-filter: blur(4px);
@@ -169,7 +169,7 @@
     .gd-description {
       position: fixed;
       z-index: 5;
-      height: 27rem;
+      height: 14rem;
       width: 33rem;
       border: 1px solid black;
       margin-left: 25rem;
@@ -181,6 +181,45 @@
 
       p {
         margin-bottom: 1rem;
+      }
+    }
+
+    .aroma-container {
+      height: 11rem;
+      width: 33rem;
+      background-color: rgba(255, 255, 240, 0.911);
+      border: 1px solid black;
+      margin-left: 25rem;
+      margin-top: 19rem;
+
+      p {
+        margin-top: 2px;
+        margin-left: 16px;
+      }
+
+      .aroma-frame {
+        display: inline-block;
+        height: 130px;
+        width: 130px;
+        border: 1px solid black;
+        text-align: center;
+        margin-top: 6px;
+        margin-left: 15px;
+        background-color: #ffffff;
+
+        .aroma-img {
+          display: inline-block;
+          max-height: 128px;
+          max-width: 128px;
+          margin: auto;
+          vertical-align: middle;
+        }
+
+        .helper {
+          display: inline-block;
+          height: 100%;
+          vertical-align: middle;
+        }
       }
     }
 
@@ -203,8 +242,9 @@
     }
 
     .close-btn1 {
+      position: fixed;
       margin-left: 59.2rem;
-      margin-top: 1rem;
+      margin-top: -29.3rem;
 
       button {
         border-radius: 50%;
