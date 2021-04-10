@@ -1,0 +1,11 @@
+.App {
+  // fundos para caso as imagens falhem
+  height: 100vh;
+  background: rgb(255, 220, 248);
+  background: radial-gradient(
+    circle at 0% 60%,
+    rgba(255, 220, 248, 1) 0%,
+    rgba(255, 255, 255, 1) 35%,
+    rgb(255, 243, 242) 58%
+  );
+}

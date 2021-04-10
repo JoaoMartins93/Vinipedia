@@ -1,0 +1,25 @@
+nav.navbar {
+  background-color: #7e080a !important;
+  box-shadow: 0 0 20px 0 rgba(48, 48, 48, 0.37);
+  position: sticky;
+}
+
+.navbar.is-primary .navbar-start > a.navbar-item.is-active,
+.navbar.is-primary .navbar-start > a.navbar-item:focus,
+.navbar.is-primary .navbar-start > a.navbar-item:hover {
+  background-color: #6f0b0b !important;
+}
+
+.icon {
+  width: 70px !important;
+  height: 56px !important;
+
+  svg {
+    font-size: 3rem;
+  }
+  p {
+    font-family: 'Pacifico', cursive;
+    font-size: 20px;
+    margin-right: -55%;
+  }
+}
