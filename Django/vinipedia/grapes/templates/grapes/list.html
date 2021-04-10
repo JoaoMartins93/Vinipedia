@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load grape_tags %}
+
+{% block content %}
+    {% for grape in grapes %}
+        <div class="item-div">
+            <a style="text-decoration: none" href="{{ grape.get_absolute_url }}">
+                <div class="item-img-div">
+                    <span class="helper"></span>
+                    <img src={{ grape.photo.url }} alt="imagem" class="img-center"/>
+                </div>
+                <p class="item-p1">{{ grape.name }}</p>
+                <p class="item-p2">Vinhos com esta casta: {{ grape.wine.count }}</p>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="top-section">
+        <h3>
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            <img class="top-section-photo" src={{user.profile.photo.url}}>
+            {% else %}
+            Sem sessão iniciada
+            {% endif %}
+        </h3>
+    </div>
+
+    <div class="content-section">
+      <h3>Pesquisar</h3>
+      <p class='text-muted'>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-light text-muted">
+              Pesquisar por nome:
+              {% search_bar %}
+          </li>
+        </ul>
+      </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="back"><a href="{% url 'grapes:grape_list' %}"><img src='../media/images/backarrow.png' alt="retroceder" class="back-arrow" /></a></div>
+
+    <div id="gdi" class="detail-item">
+        <div class="detail-img-div">
+            <span class="helper"></span>
+            <img class="detail-img" src={{ grape.photo.url }} alt="imagem" />
+        </div>
+
+        <div class="detail-text">
+            <h4 class="grape-name">{{ grape.name }}</h4>
+            <p><b>Descrição</b></p>
+            <p>{{ grape.description }}</p>
+        </div>
+
+        <div id="grape-div-desc" class="detail-description">
+            <p id="grape-desc" class="wine-description">
+                <b id="aromas">Aromas</b>
+                {% for picture in grape.aromapictures.all %}
+                    <div class="small-img-div grape-sid">
+                        <span class="helper"></span>
+                        <img class="small-img grape-smimg" src={{ picture.pathname.url }} alt="aroma" />
+                    </div>
+                {% endfor %}
+            </p>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="top-section">
+        <h3>
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            <img class="top-section-photo" src={{user.profile.photo.url}}>
+            {% else %}
+            Sem sessão iniciada
+            {% endif %}
+        </h3>
+    </div>
+
+    <div class="content-section">
+      <h3>Estatísticas</h3>
+      <p class='text-muted'>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-light">
+              <a class="stats-link" href="/wines/search_grapes?query={{grape.name}}">
+                  Número de vinhos com casta {{ grape.name }}: {{ grape.wine.count }}
+              </a>
+          </li>
+        </ul>
+      </p>
+    </div>
+{% endblock %}
