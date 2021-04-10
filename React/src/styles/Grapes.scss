@@ -191,6 +191,10 @@
       border: 1px solid black;
       margin-left: 25rem;
       margin-top: 19rem;
+      padding-left: 15px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
 
       p {
         margin-top: 2px;
@@ -204,7 +208,7 @@
         border: 1px solid black;
         text-align: center;
         margin-top: 6px;
-        margin-left: 15px;
+        margin-right: 15px;
         background-color: #ffffff;
 
         .aroma-img {
@@ -223,19 +227,22 @@
       }
     }
 
-    .gd-description::-webkit-scrollbar-track {
+    .gd-description::-webkit-scrollbar-track,
+    .aroma-container::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       border-radius: 10px;
       background-color: #f5f5f5;
     }
 
-    .gd-description::-webkit-scrollbar {
+    .gd-description::-webkit-scrollbar,
+    .aroma-container::-webkit-scrollbar {
       height: 4px;
       width: 5px;
       background-color: #f5f5f5;
     }
 
-    .gd-description::-webkit-scrollbar-thumb {
+    .gd-description::-webkit-scrollbar-thumb,
+    .aroma-container::-webkit-scrollbar-thumb {
       border-radius: 10px;
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       background-color: rgb(112, 112, 112);

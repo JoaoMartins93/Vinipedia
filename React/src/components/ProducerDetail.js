@@ -44,6 +44,23 @@ const ProducerDetail = ({ producer = [] }) => {
           </p>
         </div>
       </div>
+      <div className='producerpictures-container'>
+        <p>
+          <b>Fotografias</b>
+        </p>
+        {producer.producerpictures.map((picture) => {
+          return (
+            <div className='producerpictures-frame'>
+              <span className='helper'></span>
+              <img
+                src={picture.pathname}
+                alt='fotografia de produtor'
+                className='producerpictures-img'
+              />
+            </div>
+          );
+        })}
+      </div>
       <div className='close-btn1'>
         <button onClick={DetailCloser}>X</button>
       </div>
