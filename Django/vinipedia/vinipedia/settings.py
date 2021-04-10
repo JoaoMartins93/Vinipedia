@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = '$@2^)5ht3q+7tqr@%!va885l5ou5z%91k3iu6(c0slm5^-^8#_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-vinipedia.herokuapp.com']
 
 
 # Application definition
@@ -166,3 +167,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
+
+django_heroku.settings(locals())
