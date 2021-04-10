@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="top-wines">
+        <h4 class="index-top-title">Top Vinhos Escolhidos Pelos Utilizadores</h4>
+        {% for wine in top_wines %}
+            <div class="item-div index-item">
+                <a style="text-decoration: none" href="{{ wine.get_absolute_url }}">
+                    <div class="item-img-div index-img-div">
+                        <div class="index-score"><p>{{ wine.average_score }}</p></div>
+                        <img src={{ wine.photo.url }} alt="imagem" height="248px" class="img-center index-img"/>
+                    </div>
+                    <p class="item-p1">{{ wine.name }}</p>
+                    <p class="item-p2">{{ wine.type }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+<!--    <div class="bottom-div"></div>-->
+
+<!--    <img class="bottom-banner" src="../media/images/vineyard3.jpg" alt="vinhas"/>-->
+
+    <div class=""></div>
+
+{% endblock %}
+
+
+{% block sidebar %}
+    <div class="top-section">
+        <h3>
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            <img class="top-section-photo" src={{user.profile.photo.url}}>
+            {% else %}
+            Sem sessão iniciada
+            {% endif %}
+        </h3>
+    </div>
+
+    <div class="content-section">
+      <h3>Estatísticas</h3>
+      <p class='text-muted'>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-light stats-li">
+              <a class="stats-link" href="{% url 'wines:wine_list' %}">
+                <p class="stats-p">Número de vinhos: {{ wines.count }}</p>
+              </a>
+          </li>
+          <li class="list-group-item list-group-item-light stats-li">
+              <a class="stats-link" href="{% url 'producers:producer_list' %}">
+                <p class="stats-p">Número de produtores: {{ producers.count }}</p>
+              </a>
+          </li>
+          <li class="list-group-item list-group-item-light stats-li">
+              <a class="stats-link" href="{% url 'grapes:grape_list' %}">
+                <p class="stats-p">Número de castas: {{ grapes.count }}</p>
+              </a>
+          </li>
+          <li class="list-group-item list-group-item-light stats-li">
+              <p class="stats-p">Total de avaliações: {{ evaluations.count }}</p>
+          </li>
+        </ul>
+      </p>
+    </div>
+{% endblock %}
